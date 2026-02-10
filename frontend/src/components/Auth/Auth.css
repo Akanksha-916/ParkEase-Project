@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.auth-tri-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  transition: background 1s ease;
+  perspective: 1000px;
+}
+
+/* Background states */
+.auth-tri-wrapper.login {
+  background: linear-gradient(135deg, #6ec6ff, #4facfe);
+}
+
+.auth-tri-wrapper.register {
+  background: #ffffff;
+}
+
+/* 🔺 Triangle layer */
+.triangle-layer {
+  position: absolute;
+  inset: -20%;
+  background: #ffffff;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  transform: rotate(0deg);
+  transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 1;
+}
+
+/* Triangle morph + rotation */
+.auth-tri-wrapper.register .triangle-layer {
+  background: linear-gradient(135deg, #6ec6ff, #4facfe);
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  transform: rotate(180deg);
+}
+
+/* Content */
+.auth-content {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 💎 Glass card */
+.auth-form {
+  width: 360px;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+  animation: floatIn 0.9s ease;
+}
+
+.auth-form h1 {
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.85);
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #6ec6ff, #4facfe);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-form p {
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.auth-form span {
+  color: #4facfe;
+  font-weight: 600;
+}
+
+/* ✨ Entry animation */
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
