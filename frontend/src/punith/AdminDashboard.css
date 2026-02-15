@@ -1,0 +1,185 @@
+:root {
+  --bg-light: #f8faff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --primary-blue: #4f46e5;
+}
+
+.main-content-container {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  min-height: 100vh;
+}
+
+/* Header Section */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header-titles h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.header-titles p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 4px 0 0 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--text-muted);
+}
+
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.settings-icon {
+  cursor: pointer;
+}
+
+/* Stat Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.icon-box {
+  padding: 12px;
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blue-bg { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.green-bg { background: linear-gradient(135deg, #10b981, #059669); }
+.purple-bg { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.orange-bg { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+/* Badge Styles */
+.trend-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pos-trend {
+  background-color: #f0fdf4;
+  color: #10b981;
+}
+
+.slot-badge {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+.rev-badge {
+  background-color: #f0fdf4;
+  color: #3b82f6;
+}
+
+.stat-label { 
+  color: var(--text-muted); 
+  font-size: 14px; 
+  margin-top: 10px;
+  margin-bottom: 4px; 
+}
+
+.stat-value { 
+  font-size: 28px; 
+  font-weight: 800; 
+  margin: 0; 
+  color: var(--text-main); 
+}
+
+/* Charts */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.chart-container {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 18px;
+  color: var(--text-main);
+}
+
+/* Gradient Cards */
+.gradient-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grad-card {
+  padding: 24px;
+  border-radius: 16px;
+  color: white;
+}
+
+.blue-grad { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+.purple-grad { background: linear-gradient(135deg, #a855f7, #ec4899); }
+.green-grad { background: linear-gradient(135deg, #10b981, #14b8a6); }
+
+.grad-label { font-size: 14px; opacity: 0.9; margin-bottom: 8px; }
+.grad-value { font-size: 32px; font-weight: 700; margin: 0 0 8px 0; }
+.grad-sub { font-size: 12px; opacity: 0.8; margin: 0; }
+
+@media (max-width: 1200px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
+  .gradient-stats-grid { grid-template-columns: 1fr; }
+}

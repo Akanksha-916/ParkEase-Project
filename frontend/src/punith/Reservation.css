@@ -1,0 +1,325 @@
+.bookings-wrapper {
+  /* Increased width from 950px to 1200px */
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 40px;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1a1e26;
+  /* Subtle letter spacing for a modern look */
+  letter-spacing: 0.01em;
+}
+
+.bookings-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em; /* Tighter for large headings */
+}
+
+.bookings-header p {
+  color: #6b7280;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+/* --- ACTIVE CARD --- */
+.active-card {
+  background: #00C38E;
+  border-radius: 20px;
+  padding: 40px; /* Increased padding */
+  color: white;
+  margin-bottom: 40px;
+  box-shadow: 0 15px 30px -5px rgba(0, 195, 142, 0.25);
+}
+
+.active-card-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.active-card-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.active-price-area {
+  text-align: right;
+}
+
+.price-tag {
+  font-size: 32px;
+  font-weight: 800;
+  display: block;
+}
+
+.duration-tag {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* The Glass Bar */
+.glass-info-bar {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 20px 30px;
+  display: flex;
+  /* justify-content space-between makes it fill the horizontal width */
+  justify-content: space-between; 
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-column label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  /* Lengthy letters in labels */
+  letter-spacing: 1.5px; 
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.info-value {
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.active-details {
+  margin-bottom: 25px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.active-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-get-directions {
+  background: white;
+  color: #00C38E;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.btn-get-directions, .btn-modify-active {
+  padding: 12px 28px; /* Wider buttons */
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.btn-modify-active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* --- UPCOMING CARD --- */
+.upcoming-container {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.upcoming-section-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.upcoming-card {
+  display: flex;
+  justify-content: space-between;
+  background: #F8FAFC;
+  border: 1px solid #EDF2F7;
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform 0.2s ease;
+}
+
+.upcoming-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 6px;
+}
+
+.upcoming-top h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.badge-upcoming {
+  background: #E0E7FF;
+  color: #4338CA;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+  text-transform: lowercase;
+}
+
+.upcoming-loc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #718096;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.upcoming-card:hover {
+  transform: translateY(-2px);
+}
+
+.upcoming-grid {
+  display: flex;
+  /* Increased gap between columns */
+  gap: 100px; 
+}
+
+.grid-item label {
+  display: block;
+  font-size: 12px;
+  color: #A0AEC0;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px; /* Wider letters */
+}
+
+.grid-val {
+  font-weight: 600;
+  font-size: 16px;
+  color: #2D3748;
+}
+
+.upcoming-side-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.price-purple {
+  color: #8B5CF6;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.duration-small {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: #A0AEC0;
+}
+
+.side-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-up-modify, .btn-up-cancel {
+  background: white;
+  border: 1px solid #E2E8F0;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  width: 90px;
+}
+
+.btn-up-modify { color: #3182CE; }
+.btn-up-cancel { color: #E53E3E; }
+
+/* --- TIPS --- */
+.tips-card {
+  background: #F1F5F9;
+  padding: 32px;
+  border-radius: 20px;
+}
+
+.tips-card li {
+  font-size: 14px;
+  margin-bottom: 12px;
+  letter-spacing: 0.2px;
+}
+
+.tips-card h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.tips-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+
+.tips-card li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.t-blue::before { color: #3B82F6; }
+.t-purple::before { color: #8B5CF6; }
+.t-red::before { color: #EF4444; }
+.t-green::before { color: #10B981; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .glass-info-bar, .upcoming-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .active-card-header, .upcoming-card {
+    flex-direction: column;
+  }
+  .upcoming-side-actions {
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  .side-btns {
+    flex-direction: row;
+  }
+}
