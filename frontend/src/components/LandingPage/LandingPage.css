@@ -1,0 +1,357 @@
+/* =========================
+   GLOBAL
+========================= */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f8f7ff;
+}
+
+.landing {
+  background: linear-gradient(135deg, #f8f7ff, #ece9ff);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle Background Glow */
+.landing::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: #dcd6ff;
+  border-radius: 50%;
+  top: -120px;
+  right: -120px;
+  filter: blur(120px);
+  z-index: 0;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #4b3cc4;
+}
+
+/* Login Dropdown */
+.login-wrapper {
+  position: relative;
+}
+
+.nav-btn {
+  background: #4b3cc4;
+  color: white;
+  padding: 8px 22px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #372db0;
+  transform: scale(1.05);
+}
+
+.dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.dropdown button {
+  display: block;
+  width: 160px;
+  padding: 12px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 14px;
+}
+
+.dropdown button:hover {
+  background: #f0edff;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-left {
+  max-width: 550px;
+}
+
+.hero-left h1 {
+  font-size: 48px;
+  color: #2f2f2f;
+  line-height: 1.2;
+}
+
+.hero-left span {
+  color: #4b3cc4;
+}
+
+.hero-left p {
+  margin-top: 20px;
+  color: #555;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  margin-top: 30px;
+}
+
+/* Buttons */
+.primary-btn {
+  background: #4b3cc4;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-right: 15px;
+}
+
+.primary-btn:hover {
+  background: #372db0;
+  transform: translateY(-4px);
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 2px solid #4b3cc4;
+  color: #4b3cc4;
+  padding: 10px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.secondary-btn:hover {
+  background: #4b3cc4;
+  color: white;
+}
+
+/* =========================
+   STATS SECTION
+========================= */
+
+.stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stats div {
+  text-align: center;
+  transition: 0.4s ease;
+  cursor: default;
+}
+
+.stats div:hover {
+  transform: translateY(-10px);
+}
+
+.stats h3 {
+  font-size: 26px;
+  color: #4b3cc4;
+  margin-bottom: 8px;
+}
+
+.stats p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* =========================
+   MOCK CARD
+========================= */
+
+.mock-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(75, 60, 196, 0.2);
+  text-align: center;
+  width: 320px;
+  transition: 0.4s ease;
+}
+
+.mock-card:hover {
+  transform: translateY(-12px);
+}
+
+.mock-card h3 {
+  margin-bottom: 10px;
+  color: #4b3cc4;
+}
+
+.mock-card p {
+  color: #555;
+}
+
+.mock-card button {
+  margin-top: 20px;
+  padding: 10px 22px;
+  background: #4b3cc4;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.mock-card button:hover {
+  background: #372db0;
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #4b3cc4, transparent);
+  margin: 60px 0;
+}
+
+/* =========================
+   HOW SECTION
+========================= */
+
+.how {
+  padding: 80px;
+  text-align: center;
+}
+
+.how h2 {
+  color: #4b3cc4;
+  margin-bottom: 50px;
+}
+
+.how-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.how-card {
+  background: white;
+  padding: 30px;
+  width: 250px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(75, 60, 196, 0.1);
+  transition: 0.4s ease;
+}
+
+.how-card:hover {
+  transform: translateY(-12px);
+}
+
+.how-card h3 {
+  color: #4b3cc4;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+  text-align: center;
+  padding: 80px;
+  background: #4b3cc4;
+  color: white;
+}
+
+.cta h2 {
+  margin-bottom: 20px;
+}
+
+.cta .primary-btn {
+  background: white;
+  color: #4b3cc4;
+}
+
+.cta .primary-btn:hover {
+  background: #f0edff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #2e27a5;
+  color: white;
+  font-size: 14px;
+}
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   DROPDOWN ANIMATION
+========================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
