@@ -10,9 +10,9 @@ export default function LandingPage() {
     const isLoggedIn = localStorage.getItem("user");
 
     if (isLoggedIn) {
-      navigate("/reserve");
+      navigate("/Parking"); // ✅ Go to Parking page
     } else {
-      navigate("/auth?mode=login");
+      navigate("/user-auth?mode=login"); // ✅ Go to User Login
     }
   };
 
@@ -32,15 +32,15 @@ export default function LandingPage() {
           </button>
 
           {showDropdown && (
-  <div className="dropdown">
-    <button onClick={() => navigate("/user-auth?mode=login")}>
-      User Login
-    </button>
-    <button onClick={() => navigate("/admin-auth?mode=login")}>
-      Admin Login
-    </button>
-  </div>
-)}
+            <div className="dropdown">
+              <button onClick={() => navigate("/user-auth?mode=login")}>
+                User Login
+              </button>
+              <button onClick={() => navigate("/admin-auth?mode=login")}>
+                Admin Login
+              </button>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -58,7 +58,7 @@ export default function LandingPage() {
 
           <div className="hero-buttons">
             <button className="primary-btn" onClick={handleReserve}>
-              Explore More 
+              Explore More
             </button>
 
             <button
@@ -89,7 +89,9 @@ export default function LandingPage() {
           <div className="mock-card">
             <h3>🚗 Slot Available</h3>
             <p>Real-time availability updated instantly</p>
-            <button onClick={handleReserve}>Reserve Now</button>
+            <button onClick={handleReserve}>
+              Reserve Now
+            </button>
           </div>
         </div>
       </section>
@@ -128,7 +130,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="footer">
-        © 2026 ParkEase | Intelligent Parking System
+        © 2026 ParkEase | Smart Parking System
       </footer>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 
 export default function UserAuth() {
@@ -11,6 +12,7 @@ export default function UserAuth() {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -43,16 +45,20 @@ export default function UserAuth() {
 
     if (!validate()) return;
 
+    // Save user data
+    localStorage.setItem("user", JSON.stringify(formData));
+    localStorage.setItem("role", "user");
+
     if (isLogin) {
-      localStorage.setItem("user", JSON.stringify(formData));
       alert("Login Successful");
     } else {
-      localStorage.setItem("user", JSON.stringify(formData));
       alert("Account Created Successfully");
-      setIsLogin(true);
     }
 
-    // Reset form after submit
+    // Navigate to User Dashboard
+    navigate("/user-dashboard");
+
+    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -62,8 +68,6 @@ export default function UserAuth() {
 
   return (
     <div className={`auth-tri-wrapper ${isLogin ? "login" : "register"}`}>
-      
-      {/* Background Triangle Layer */}
       <div className="triangle-layer"></div>
 
       <div className="auth-content">

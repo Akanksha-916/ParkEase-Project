@@ -1,10 +1,35 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Added to enable navigation
 import "./parking.css";
 import { 
   Search, SlidersHorizontal, MapPin, Star, Navigation, 
   Clock, Zap, Heart, ArrowLeft, Shield, CheckCircle2, XCircle, Calendar
 } from "lucide-react";
 
+const handlePayment = (amount, onSuccess) => {
+  const options = {
+    key: "rzp_test_Qb9FurfVY6ULB", // Replace with Razorpay test key
+    amount: amount * 100, // Razorpay expects paise
+    currency: "INR",
+    name: "ParkEase Demo",
+    description: "Parking Slot Payment",
+    handler: function (response) {
+      alert("Payment Successful: " + response.razorpay_payment_id);
+      onSuccess(); // Proceed to booking confirmation
+    },
+    prefill: {
+      name: "Demo User",
+      email: "demo@example.com",
+      contact: "9999999999",
+    },
+    theme: {
+      color: "#00C38E",
+    },
+  };
+
+  const rzp = new window.Razorpay(options);
+  rzp.open();
+};
 const mockData = [
   {
     id: 1,
@@ -96,6 +121,7 @@ export default function ParkingPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState("");
   const selectedParking = mockData.find(p => p.id === activeId);
+  const navigate = useNavigate(); // ✅ Initialize navigate
 
   return (
     <div className="parkeasy-container">
@@ -107,7 +133,6 @@ export default function ParkingPage() {
               <p>Search and filter parking locations near you</p>
             </header>
 
-            {/* --- UPDATED FILTER SECTION --- */}
             <section className="pe-search-filter-card">
               <div className="pe-search-row">
                 <div className="pe-input-wrapper">
@@ -166,7 +191,6 @@ export default function ParkingPage() {
               <ArrowLeft size={16} /> Back to search
             </button>
 
-            {/* ... Rest of the Details View remains the same ... */}
             <div className="pd-hero-container">
               <div className="pd-hero-image-box">
                 <img src={selectedParking.image} alt={selectedParking.name} />
@@ -236,7 +260,60 @@ export default function ParkingPage() {
                   <input type="time" defaultValue="17:00" />
                 </div>
               </div>
-              <button className="pd-confirm-booking-btn">Confirm Booking</button>
+              
+              {/* ✅ Only fix for linking pages */}
+              <button
+  className="pd-confirm-booking-btn"
+  onClick={() => {
+    if (!selectedSlot) {
+      alert("Please select a slot before confirming!");
+      return;
+    }
+
+    // Frontend demo payment
+    const handlePayment = () => {
+      const options = {
+        key: "rzp_test_YourTestKeyHere", // Replace with Razorpay test key
+        amount: selectedParking.price * 100, // amount in paise
+        currency: "INR",
+        name: "ParkEase Demo",
+        description: "Parking Slot Payment",
+        handler: function (response) {
+          alert("Payment Successful! ID: " + response.razorpay_payment_id);
+
+          // After payment success, navigate to Reservation page with booking info
+          navigate("/Reservation", {
+            state: {
+              name: selectedParking.name,
+              slot: selectedSlot,
+              address: selectedParking.address,
+              date: "2026-02-14",
+              timeStart: "14:00",
+              timeEnd: "18:00",
+              price: selectedParking.price,
+              duration: 4
+            }
+          });
+        },
+        prefill: {
+          name: "Demo User",
+          email: "demo@example.com",
+          contact: "9999999999",
+        },
+        theme: {
+          color: "#00C38E",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    };
+
+    handlePayment(); // Trigger payment
+  }}
+>
+  Confirm Booking
+</button>
             </div>
           </div>
         )}

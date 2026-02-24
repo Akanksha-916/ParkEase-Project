@@ -1,3 +1,65 @@
+
+/* --- ACTIVE CARD TEXT COLORS --- */
+.active-card h2 {
+  color: #090000; /* main parking name */
+}
+
+.status-indicator {
+  color: #00C38E; /* Active Booking label */
+}
+
+.price-tag {
+  color: #00C38E; /* price */
+}
+
+.duration-tag {
+  color: #110000; /* duration */
+}
+
+.info-column label {
+  color: #000000; /* labels like Booking ID, Slot Number, Date */
+}
+
+.info-value {
+  color: #0d0101; /* actual values like B001, A-45, Feb 14 */
+}
+
+.active-details span {
+  color: #060000; /* address and time text */
+}
+
+/* Buttons text */
+.btn-get-directions,
+.btn-modify-active {
+  color: #0b0000; /* button text */
+}
+
+/* --- UPCOMING CARD TEXT COLORS --- */
+.upcoming-card h3 {
+  color: #0e0000; /* parking name */
+}
+
+.badge-upcoming {
+  color: #00C38E; /* badge text */
+}
+
+.upcoming-loc span {
+  color: #000000; /* address */
+}
+
+.grid-val {
+  color: #000000; /* booking info like ID, Date, Slot */
+}
+
+/* Buttons text */
+.btn-up-modify {
+  color: #00C38E;
+}
+
+.btn-up-cancel {
+  color: #ff4d4d;
+}
+
 .bookings-wrapper {
   /* Increased width from 950px to 1200px */
   max-width: 1200px;
@@ -24,10 +86,10 @@
 
 /* --- ACTIVE CARD --- */
 .active-card {
-  background: #00C38E;
+  background: linear-gradient(135deg, #dec4f7, #b4d6f8);
   border-radius: 20px;
   padding: 40px; /* Increased padding */
-  color: white;
+  color: rgb(0, 0, 0);
   margin-bottom: 40px;
   box-shadow: 0 15px 30px -5px rgba(0, 195, 142, 0.25);
 }
@@ -50,6 +112,7 @@
 .active-card-header h2 {
   font-size: 24px;
   font-weight: 700;
+  colour: black;
 }
 
 .active-price-area {
@@ -117,7 +180,8 @@
 
 .btn-get-directions {
   background: white;
-  color: #00C38E;
+  color: #6d28d9;
+
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -135,7 +199,7 @@
 
 .btn-modify-active {
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: #6d28d9;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -147,29 +211,33 @@
 }
 
 /* --- UPCOMING CARD --- */
-.upcoming-container {
-  background: white;
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  margin-bottom: 40px;
-}
 
 .upcoming-section-title {
   font-size: 20px;
   margin-bottom: 20px;
 }
 
+
+.upcoming-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
 .upcoming-card {
   display: flex;
   justify-content: space-between;
-  background: #F8FAFC;
-  border: 1px solid #EDF2F7;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   padding: 28px;
   transition: transform 0.2s ease;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
-
 .upcoming-top {
   display: flex;
   align-items: center;
@@ -322,4 +390,62 @@
   .side-btns {
     flex-direction: row;
   }
+}
+.modify-inline-form {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 12px;
+  color: white;
+  animation: fadeIn 0.3s ease;
+}
+
+.modify-inline-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.modify-inline-form label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.modal-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.modal-actions button:first-child {
+  background: #00C38E;
+  color: white;
+}
+
+.modal-actions button:last-child {
+  background: #f44336;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(-10px);}
+  to {opacity:1; transform: translateY(0);}
 }
