@@ -9,6 +9,8 @@ import AdminDashboard from "./punith/AdminDashboard.jsx";
 
 import Parking from "./punith/Parking.jsx";
 import Reservation from "./punith/Reservation.jsx";
+import UserLayout from "./punith/UserLayout";
+import Profile from "./punith/Profile.jsx";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -21,6 +23,14 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/user-auth" element={<UserAuth />} />
         <Route path="/admin-auth" element={<AdminAuth />} />
+        <Route path="/dashboard" element={<UserLayout />}>
+          
+          {/* ✅ Default page when visiting /dashboard */}
+          <Route index element={<UserDashboard />} />
+          {/* Other nested routes */}
+            
+
+        </Route>
 
         {/* User Dashboard */}
         <Route
@@ -61,8 +71,19 @@ function App() {
           }
         />
 
+        <Route
+          path="/Profile"
+          element={
+            <ProtectedRoute roleRequired="user">
+              <Profile/>
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
     </Router>
+
+
   );
 }
 

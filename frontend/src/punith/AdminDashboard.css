@@ -5,12 +5,12 @@
   --primary-blue: #4f46e5;
 }
 
-.main-content-container {
+/*.main-content-container {
   padding: 20px;
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-light);
   min-height: 100vh;
-}
+}*/
 
 /* Header Section */
 .dashboard-header {

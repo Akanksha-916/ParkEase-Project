@@ -4,6 +4,8 @@
 
 body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   font-family: "Poppins", sans-serif;
   background: #f8f7ff;
 }
@@ -13,6 +15,13 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+}
+
+
+.landing-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
 }
 
 /* Subtle Background Glow */
@@ -154,7 +163,7 @@ body {
 
 .secondary-btn {
   background: transparent;
-  border: 2px solid ;
+  border: 2px solid #6d28d9;
   color: #6d28d9;
   padding: 10px 24px;
   border-radius: 30px;

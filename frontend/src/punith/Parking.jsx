@@ -1,35 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Added to enable navigation
 import "./parking.css";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { 
   Search, SlidersHorizontal, MapPin, Star, Navigation, 
   Clock, Zap, Heart, ArrowLeft, Shield, CheckCircle2, XCircle, Calendar
 } from "lucide-react";
 
-const handlePayment = (amount, onSuccess) => {
-  const options = {
-    key: "rzp_test_Qb9FurfVY6ULB", // Replace with Razorpay test key
-    amount: amount * 100, // Razorpay expects paise
-    currency: "INR",
-    name: "ParkEase Demo",
-    description: "Parking Slot Payment",
-    handler: function (response) {
-      alert("Payment Successful: " + response.razorpay_payment_id);
-      onSuccess(); // Proceed to booking confirmation
-    },
-    prefill: {
-      name: "Demo User",
-      email: "demo@example.com",
-      contact: "9999999999",
-    },
-    theme: {
-      color: "#00C38E",
-    },
-  };
 
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-};
 const mockData = [
   {
     id: 1,
@@ -90,7 +68,103 @@ const mockData = [
     predictedAvailability: 95,
     features: ["Open Air", "Affordable", "24/7 Access"],
     image: "https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?auto=format&fit=crop&q=80&w=800"
-  }
+  },
+
+  {
+  id: 5,
+  name: "City Center Smart Parking",
+  address: "78 MG Road, City Center",
+  distance: 0.8,
+  price: 6,
+  rating: 4.4,
+  reviews: 289,
+  availableSlots: 60,
+  totalSlots: 180,
+  occupiedSlots: 120,
+  predictedAvailability: 70,
+  features: ["EV Charging", "24/7 Security", "Smart Sensors"],
+  image: "https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&q=80&w=800"
+},
+
+{
+  id: 6,
+  name: "Metro Station Parking Hub",
+  address: "Near Metro Gate 3, Andheri",
+  distance: 1.5,
+  price: 4,
+  rating: 4.3,
+  reviews: 412,
+  availableSlots: 95,
+  totalSlots: 220,
+  occupiedSlots: 125,
+  predictedAvailability: 80,
+  features: ["Covered", "CCTV", "Metro Access"],
+  image: "https://images.unsplash.com/photo-1593941707882-a5bba53b6c6d?auto=format&fit=crop&q=80&w=800"
+},
+
+{
+  id: 7,
+  name: "Tech Park Underground Parking",
+  address: "Phase 2 IT Park, Hinjewadi",
+  distance: 4.2,
+  price: 7,
+  rating: 4.8,
+  reviews: 601,
+  availableSlots: 35,
+  totalSlots: 140,
+  occupiedSlots: 105,
+  predictedAvailability: 40,
+  features: ["Covered", "EV Charging", "Car Wash"],
+  image: "https://images.unsplash.com/photo-1601333144130-8cbb312386b6?auto=format&fit=crop&q=80&w=800"
+},
+
+{
+  id: 8,
+  name: "Airport Long Stay Parking",
+  address: "Terminal 2, Airport Road",
+  distance: 6.8,
+  price: 10,
+  rating: 4.6,
+  reviews: 890,
+  availableSlots: 150,
+  totalSlots: 300,
+  occupiedSlots: 150,
+  predictedAvailability: 85,
+  features: ["24/7 Access", "Shuttle Service", "Security Patrol"],
+  image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800"
+},
+
+{
+  id: 9,
+  name: "Hospital Visitor Parking",
+  address: "City Hospital Road",
+  distance: 2.9,
+  price: 3,
+  rating: 4.2,
+  reviews: 198,
+  availableSlots: 25,
+  totalSlots: 90,
+  occupiedSlots: 65,
+  predictedAvailability: 35,
+  features: ["Wheelchair Access", "24/7 Security", "Affordable"],
+  image: "https://images.unsplash.com/photo-1570125909517-53cb21c89ff2?auto=format&fit=crop&q=80&w=800"
+},
+
+{
+  id: 10,
+  name: "Luxury Mall VIP Parking",
+  address: "Grand Mall, VIP Entrance",
+  distance: 1.0,
+  price: 12,
+  rating: 4.9,
+  reviews: 720,
+  availableSlots: 20,
+  totalSlots: 80,
+  occupiedSlots: 60,
+  predictedAvailability: 30,
+  features: ["Valet Service", "Covered", "Premium Security"],
+  image: "https://images.unsplash.com/photo-1592840062661-4d3a14f28b5b?auto=format&fit=crop&q=80&w=800"
+}
 ];
 
 function ParkingCard({ data, onSelect }) {
@@ -262,58 +336,135 @@ export default function ParkingPage() {
               </div>
               
               {/* ✅ Only fix for linking pages */}
-              <button
-  className="pd-confirm-booking-btn"
-  onClick={() => {
-    if (!selectedSlot) {
-      alert("Please select a slot before confirming!");
-      return;
-    }
+              {!selectedSlot ? (
+  <button
+    className="pd-confirm-booking-btn"
+    onClick={() => alert("Please select a slot before confirming!")}
+  >
+    Confirm Booking
+  </button>
 
-    // Frontend demo payment
-    const handlePayment = () => {
-      const options = {
-        key: "rzp_test_YourTestKeyHere", // Replace with Razorpay test key
-        amount: selectedParking.price * 100, // amount in paise
-        currency: "INR",
-        name: "ParkEase Demo",
-        description: "Parking Slot Payment",
-        handler: function (response) {
-          alert("Payment Successful! ID: " + response.razorpay_payment_id);
-
-          // After payment success, navigate to Reservation page with booking info
-          navigate("/Reservation", {
-            state: {
-              name: selectedParking.name,
-              slot: selectedSlot,
-              address: selectedParking.address,
-              date: "2026-02-14",
-              timeStart: "14:00",
-              timeEnd: "18:00",
-              price: selectedParking.price,
-              duration: 4
-            }
+  
+) : (
+  <div style={{ marginTop: "20px" }}>
+    <PayPalScriptProvider
+      options={{
+        "client-id": "AWgVuNXo2On6PrZftFnWmf0eDDwK3UAY8XvolyA3xi1I0BKzlZwDlVwaSs6MP4MGliqm58uLxQ8m1okW", // 👈 paste your sandbox client id
+        currency: "USD",
+      }}
+    >
+      <PayPalButtons
+        style={{ layout: "vertical" }}
+        createOrder={(data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: selectedParking.price.toString(),
+                },
+              },
+            ],
           });
-        },
-        prefill: {
-          name: "Demo User",
-          email: "demo@example.com",
-          contact: "9999999999",
-        },
-        theme: {
-          color: "#00C38E",
-        },
-      };
+        }}
+        onApprove={(data, actions) => {
+          return actions.order.capture().then(function () {
+            alert("Payment Successful via PayPal!");
 
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    };
+            navigate("/Reservation", {
+  state: {
+    name: selectedParking.name,
+    slot: selectedSlot,
+    address: selectedParking.address,
+    date: selectedDate,
+    timeStart: selectedStartTime,
+    timeEnd: selectedEndTime,
+    price: selectedParking.price,
+    duration: selectedDuration,
+  },
+});
+          });
+        }}
+        onError={(err) => {
+          console.error(err);
+          alert("Payment Failed!");
+        }}
+      />
+    </PayPalScriptProvider>
+  </div>
+)}
 
-    handlePayment(); // Trigger payment
-  }}
->
-  Confirm Booking
-</button>
+
+<div className="fake-payment-section">
+  <hr style={{ margin: "20px 0" }} />
+  <p style={{ textAlign: "center", fontWeight: "600" }}>OR Pay Using</p>
+
+  <div className="fake-payment-buttons">
+    <button
+      className="upi-btn"
+      onClick={() => {
+        alert("UPI Payment Successful (Demo)");
+        navigate("/Reservation", {
+          state: {
+            name: selectedParking.name,
+            slot: selectedSlot,
+            address: selectedParking.address,
+            date: "2026-02-14",
+            timeStart: "14:00",
+            timeEnd: "18:00",
+            price: selectedParking.price,
+            duration: 4,
+          },
+        });
+      }}
+    >
+      Pay via UPI
+    </button>
+
+    <button
+      className="gpay-btn"
+      onClick={() => {
+        alert("Google Pay Payment Successful (Demo)");
+        navigate("/Reservation", {
+          state: {
+            name: selectedParking.name,
+            slot: selectedSlot,
+            address: selectedParking.address,
+            date: "2026-02-14",
+            timeStart: "14:00",
+            timeEnd: "18:00",
+            price: selectedParking.price,
+            duration: 4,
+          },
+        });
+      }}
+    >
+      Google Pay
+    </button>
+
+    <button
+      className="phonepe-btn"
+      onClick={() => {
+        alert("PhonePe Payment Successful (Demo)");
+        navigate("/Reservation", {
+          state: {
+            name: selectedParking.name,
+            slot: selectedSlot,
+            address: selectedParking.address,
+            date: "2026-02-14",
+            timeStart: "14:00",
+            timeEnd: "18:00",
+            price: selectedParking.price,
+            duration: 4,
+          },
+        });
+      }}
+    >
+      PhonePe
+    </button>
+  </div>
+</div>
+
+
             </div>
           </div>
         )}

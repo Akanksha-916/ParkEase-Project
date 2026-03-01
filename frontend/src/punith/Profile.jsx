@@ -38,7 +38,7 @@ export default function Profile() {
 
       {/* Main Profile Card */}
       <div className="profile-hero-card">
-        <div className="hero-left">
+        <div className="profile-hero-left">
           <div className="avatar-wrapper">
             <img src={userData.avatar} alt="Profile" className="profile-img" />
             <button className="camera-btn">

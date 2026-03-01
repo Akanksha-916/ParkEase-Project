@@ -294,3 +294,110 @@
   font-weight: 500;
   outline: none;
 }
+.fake-payment-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.upi-btn, .gpay-btn, .phonepe-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.upi-btn {
+  background-color: #6a1b9a;
+  color: white;
+}
+
+.gpay-btn {
+  background-color: #4285F4;
+  color: white;
+}
+
+.phonepe-btn {
+  background-color: #5f259f;
+  color: white;
+}
+
+.upi-btn:hover,
+.gpay-btn:hover,
+.phonepe-btn:hover {
+  transform: scale(1.05);
+}
+/* Divider */
+.payment-divider {
+  text-align: center;
+  margin: 30px 0 15px;
+  font-weight: 600;
+  color: #666;
+}
+
+.payment-method-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Payment Card */
+.payment-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.payment-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Buttons */
+.pay-btn {
+  margin-top: 12px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upi-color {
+  background: #6a1b9a;
+}
+
+.gpay-color {
+  background: #4285F4;
+}
+
+.phonepe-color {
+  background: #5f259f;
+}
+
+.qr-color {
+  background: #00c38e;
+}
+
+.pay-btn:hover {
+  opacity: 0.85;
+}
+
+/* UPI Input */
+.upi-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  margin-top: 8px;
+}
+
+/* Fake QR */
