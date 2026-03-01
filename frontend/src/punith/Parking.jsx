@@ -349,7 +349,7 @@ export default function ParkingPage() {
   <div style={{ marginTop: "20px" }}>
     <PayPalScriptProvider
       options={{
-        "client-id": "AWgVuNXo2On6PrZftFnWmf0eDDwK3UAY8XvolyA3xi1I0BKzlZwDlVwaSs6MP4MGliqm58uLxQ8m1okW", // 👈 paste your sandbox client id
+        "client-id": "client_id", // 👈 paste your sandbox client id
         currency: "USD",
       }}
     >
