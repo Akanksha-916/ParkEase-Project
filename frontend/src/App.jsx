@@ -4,13 +4,13 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import UserAuth from "./components/Auth/UserAuth";
 import AdminAuth from "./components/Auth/AdminAuth";
 
-import UserDashboard from "./punith/UserDashboard.jsx";
-import AdminDashboard from "./punith/AdminDashboard.jsx";
+import UserDashboard from "./components/User/UserDashboard.jsx";
+import AdminDashboard from "./components/Admin/AdminDashboard.jsx";
 
-import Parking from "./punith/Parking.jsx";
-import Reservation from "./punith/Reservation.jsx";
-import UserLayout from "./punith/UserLayout";
-import Profile from "./punith/Profile.jsx";
+import Parking from "./components/User/Parking.jsx";
+import Reservation from "./components/User/Reservation.jsx";
+import UserLayout from "./components/User/UserLayout.jsx";
+import Profile from "./components/User/Profile.jsx";
 
 import ProtectedRoute from "./ProtectedRoute";
 
