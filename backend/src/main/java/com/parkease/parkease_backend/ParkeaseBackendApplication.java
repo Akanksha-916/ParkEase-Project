@@ -10,4 +10,6 @@ public class ParkeaseBackendApplication {
 		SpringApplication.run(ParkeaseBackendApplication.class, args);
 	}
 
+
+
 }
