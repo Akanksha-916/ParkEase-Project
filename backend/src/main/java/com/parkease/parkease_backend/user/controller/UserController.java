@@ -1,16 +1,18 @@
-package com.parkease.parkease_backend.controller;
+package com.parkease.parkease_backend.user.controller;
 
-import com.parkease.parkease_backend.base.User;
-import com.parkease.parkease_backend.service.UserService;
+import com.parkease.parkease_backend.user.base.User;
+import com.parkease.parkease_backend.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 
 @RestController
-@RequestMapping("/users")
-
+@RequestMapping("/api/v1/users")
 public class UserController {
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -22,15 +24,13 @@ public class UserController {
         return userService.createUser(user);
     }
 
-
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
@@ -38,7 +38,6 @@ public class UserController {
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
-
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {

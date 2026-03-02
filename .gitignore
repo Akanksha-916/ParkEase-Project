@@ -1,10 +1,26 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+############################################
+# ========== GENERAL ==========
+############################################
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
 
-### STS ###
+############################################
+# ========== IDE FILES ==========
+############################################
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Eclipse / STS
 .apt_generated
 .classpath
 .factorypath
@@ -13,29 +29,43 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+############################################
+# ========== MAVEN ==========
+############################################
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Root target
+target/
 
-### VS Code ###
-.vscode/
-src/main/resources/application-dev.yml
-# Local configuration (DO NOT PUSH)
-src/main/resources/application.properties
-src/main/resources/application.yml
-src/main/resources/application-dev.yml
-src/main/resources/application-*.yml
+# Backend target
+backend/target/
 
+# Maven Wrapper Jar (optional)
+.mvn/wrapper/maven-wrapper.jar
 
+############################################
+# ========== BACKEND CONFIG (DO NOT PUSH SECRETS) ==========
+############################################
+
+# Ignore all Spring config files inside backend
+backend/src/main/resources/application*.properties
+backend/src/main/resources/application*.yml
+backend/src/main/resources/application*.yaml
+
+############################################
+# ========== NODE (if frontend uses React) ==========
+############################################
+
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+############################################
+# ========== ENV FILES ==========
+############################################
+.env
+.env.*
+
+############################################
+# ========== OS ==========
+############################################
+Desktop.ini

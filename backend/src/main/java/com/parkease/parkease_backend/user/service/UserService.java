@@ -1,9 +1,8 @@
-package com.parkease.parkease_backend.service;
+package com.parkease.parkease_backend.user.service;
 
-import com.parkease.parkease_backend.base.User;
+import com.parkease.parkease_backend.user.base.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
@@ -11,7 +10,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    Optional<User> getUserById(Long id);
+    User getUserById(Long id);
 
     User updateUser(Long id, User user);
 
