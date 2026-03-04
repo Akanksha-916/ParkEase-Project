@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class ParkingSlot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,12 +25,16 @@ public class ParkingSlot {
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private SlotSize size;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private VehicleType vehicleType;
 
-    private boolean isAvailable = true;
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean active = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lot_id", nullable = false)

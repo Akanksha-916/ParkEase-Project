@@ -17,4 +17,5 @@ public class ParkingLotResponse {
     private String pincode;
     private LocalDateTime createdAt;
     private List<ParkingSlotResponse> slots;
+    private boolean active;
 }

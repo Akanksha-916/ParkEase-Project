@@ -16,5 +16,5 @@ public class ParkingSlotResponse {
     private BigDecimal price;
     private SlotSize size;
     private VehicleType vehicleType;
-    private boolean isAvailable;
+    private boolean active;
 }

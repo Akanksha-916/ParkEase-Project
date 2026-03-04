@@ -7,7 +7,12 @@ import com.parkease.parkease_backend.parking.dto.ParkingSlotResponse;
 import com.parkease.parkease_backend.parking.entity.ParkingLot;
 import com.parkease.parkease_backend.parking.entity.ParkingSlot;
 import com.parkease.parkease_backend.parking.repository.ParkingLotRepository;
+import com.parkease.parkease_backend.user.base.Role;
+import com.parkease.parkease_backend.user.base.User;
+import com.parkease.parkease_backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,15 +23,25 @@ import java.util.List;
 public class ParkingLotService {
 
     private final ParkingLotRepository parkingLotRepository;
+    private final UserRepository userRepository;
 
     @Transactional
-    public ParkingLotResponse createParkingLot(ParkingLotRequest request) {
+    public ParkingLotResponse createParkingLot(ParkingLotRequest request,
+                                               Authentication authentication) {
+
+        User owner = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (owner.getRole() != Role.OWNER) {
+            throw new AccessDeniedException("Only owners can create parking lots");
+        }
 
         ParkingLot parkingLot = ParkingLot.builder()
                 .name(request.getName())
                 .address(request.getAddress())
                 .city(request.getCity())
                 .pincode(request.getPincode())
+                .owner(owner)
                 .build();
 
         List<ParkingSlot> slots = request.getSlots().stream()
@@ -42,7 +57,6 @@ public class ParkingLotService {
 
     @Transactional(readOnly = true)
     public List<ParkingLotResponse> getAllParkingLots() {
-
         return parkingLotRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
@@ -51,7 +65,6 @@ public class ParkingLotService {
 
     @Transactional(readOnly = true)
     public ParkingLotResponse getParkingLotById(Long id) {
-
         ParkingLot lot = parkingLotRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Parking lot not found"));
 
@@ -59,8 +72,19 @@ public class ParkingLotService {
     }
 
     @Transactional
-    public void deleteParkingLot(Long id) {
-        parkingLotRepository.deleteById(id);
+    public void deleteParkingLot(Long id, Authentication authentication) {
+
+        User owner = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ParkingLot lot = parkingLotRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Parking lot not found"));
+
+        if (!lot.getOwner().getId().equals(owner.getId())) {
+            throw new AccessDeniedException("Not your parking lot");
+        }
+
+        parkingLotRepository.delete(lot);
     }
 
     private ParkingSlot mapToSlotEntity(ParkingSlotRequest request,
@@ -71,7 +95,7 @@ public class ParkingLotService {
                 .price(request.getPrice())
                 .size(request.getSize())
                 .vehicleType(request.getVehicleType())
-                .isAvailable(true)
+                .active(true)
                 .parkingLot(parkingLot)
                 .build();
     }
@@ -86,7 +110,7 @@ public class ParkingLotService {
                         .price(slot.getPrice())
                         .size(slot.getSize())
                         .vehicleType(slot.getVehicleType())
-                        .isAvailable(slot.isAvailable())
+                        .active(slot.isActive())
                         .build())
                 .toList();
 
@@ -97,26 +121,8 @@ public class ParkingLotService {
                 .city(lot.getCity())
                 .pincode(lot.getPincode())
                 .createdAt(lot.getCreatedAt())
+                .active(lot.isActive())
                 .slots(slotResponses)
                 .build();
-    }
-
-    @Transactional(readOnly = true)
-    public List<ParkingSlotResponse> getSlotsByLotId(Long lotId) {
-
-        ParkingLot lot = parkingLotRepository.findById(lotId)
-                .orElseThrow(() -> new RuntimeException("Parking lot not found"));
-
-        return lot.getSlots()
-                .stream()
-                .map(slot -> ParkingSlotResponse.builder()
-                        .id(slot.getId())
-                        .slotNumber(slot.getSlotNumber())
-                        .price(slot.getPrice())
-                        .size(slot.getSize())
-                        .vehicleType(slot.getVehicleType())
-                        .isAvailable(slot.isAvailable())
-                        .build())
-                .toList();
     }
 }

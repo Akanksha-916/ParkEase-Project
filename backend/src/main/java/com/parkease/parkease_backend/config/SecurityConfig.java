@@ -2,21 +2,16 @@ package com.parkease.parkease_backend.config;
 
 import com.parkease.parkease_backend.security.CustomUserDetailsService;
 import com.parkease.parkease_backend.security.JwtAuthenticationFilter;
-import org.springframework.http.HttpMethod;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -37,24 +32,26 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> {})
+                .cors(cors -> {
+                })
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth ->
-                        auth .requestMatchers(
+                        auth.requestMatchers(
                                         "/v3/api-docs/**",
                                         "/swagger-ui/**",
                                         "/swagger-ui.html"
                                 ).permitAll()
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/api/v1/users/**").hasRole( "ADMIN")
-                                .requestMatchers("/api/v1/profile/**").hasAnyRole("USER","ADMIN")
+                                .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
+                                .requestMatchers("/api/v1/profile/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/parking-lots/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/parking-lots/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.DELETE, "/api/v1/parking-lots/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/v1/parking-lots/**").hasAnyRole("OWNER", "ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/v1/parking-lots/**").hasAnyRole("OWNER", "ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/v1/parking-lots/**").hasAnyRole("OWNER", "ADMIN")
                                 .anyRequest().authenticated()
 
                 )

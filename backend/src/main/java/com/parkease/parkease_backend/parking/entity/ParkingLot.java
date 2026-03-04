@@ -1,4 +1,6 @@
 package com.parkease.parkease_backend.parking.entity;
+
+import com.parkease.parkease_backend.user.base.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class ParkingLot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,12 +30,21 @@ public class ParkingLot {
 
     private String pincode;
 
-    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
+    @Builder.Default
     @OneToMany(mappedBy = "parkingLot",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<ParkingSlot> slots = new ArrayList<>();
+
+    private LocalDateTime createdAt;
 
     @PrePersist
     public void prePersist() {

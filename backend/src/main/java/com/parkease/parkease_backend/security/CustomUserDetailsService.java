@@ -5,6 +5,7 @@ import com.parkease.parkease_backend.user.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import com.parkease.parkease_backend.user.base.UserStatus;
 
 import java.util.List;
 
@@ -24,6 +25,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found"));
+
+
+        if (user.getStatus() != UserStatus.ACTIVE) {
+            throw new UsernameNotFoundException("User is blocked or suspended");
+        }
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),

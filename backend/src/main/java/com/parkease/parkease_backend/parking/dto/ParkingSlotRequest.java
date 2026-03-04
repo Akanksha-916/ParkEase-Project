@@ -22,4 +22,5 @@ public class ParkingSlotRequest {
 
     @NotNull(message = "Vehicle type is required")
     private VehicleType vehicleType;
+
 }

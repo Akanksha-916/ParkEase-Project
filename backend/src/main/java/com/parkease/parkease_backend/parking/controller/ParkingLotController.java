@@ -7,6 +7,7 @@ import com.parkease.parkease_backend.parking.service.ParkingLotService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ public class ParkingLotController {
     private final ParkingLotService parkingLotService;
 
     @PostMapping
-    public ParkingLotResponse createParkingLot(@Valid @RequestBody ParkingLotRequest request) {
-        return parkingLotService.createParkingLot(request);
+    public ParkingLotResponse createParkingLot(
+            @RequestBody ParkingLotRequest request,
+            Authentication authentication) {
+
+        return parkingLotService.createParkingLot(request, authentication);
     }
 
     @GetMapping
@@ -31,13 +35,12 @@ public class ParkingLotController {
     public ParkingLotResponse getParkingLotById(@PathVariable Long id) {
         return parkingLotService.getParkingLotById(id);
     }
-    @GetMapping("/{id}/slots")
-    public List<ParkingSlotResponse> getSlotsByLotId(@PathVariable Long id) {
-        return parkingLotService.getSlotsByLotId(id);
-    }
 
     @DeleteMapping("/{id}")
-    public void deleteParkingLot(@PathVariable Long id) {
-        parkingLotService.deleteParkingLot(id);
+    public void deleteParkingLot(
+            @PathVariable Long id,
+            Authentication authentication) {
+
+        parkingLotService.deleteParkingLot(id, authentication);
     }
 }
