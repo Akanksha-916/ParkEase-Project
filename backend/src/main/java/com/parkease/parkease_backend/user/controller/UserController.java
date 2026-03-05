@@ -2,12 +2,17 @@ package com.parkease.parkease_backend.user.controller;
 
 import com.parkease.parkease_backend.user.base.User;
 import com.parkease.parkease_backend.user.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Tag(
+        name = "Admin User Management",
+        description = "These APIs are restricted to ADMIN users only. Regular users should use profile APIs instead."
+)
 
 @RestController
 @RequestMapping("/api/v1/users")
