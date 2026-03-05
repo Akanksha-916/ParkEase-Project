@@ -56,7 +56,7 @@ export default function UserAuth() {
     }
 
     // Navigate to User Dashboard
-    navigate("/user-dashboard");
+    navigate("/dashboard");
 
     // Reset form
     setFormData({

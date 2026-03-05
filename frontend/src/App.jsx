@@ -4,14 +4,15 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import UserAuth from "./components/Auth/UserAuth";
 import AdminAuth from "./components/Auth/AdminAuth";
 
-import UserDashboard from "./components/User/UserDashboard.jsx";
-import AdminDashboard from "./components/Admin/AdminDashboard.jsx";
+import UserLayout from "./components/User/UserLayout";
+import UserDashboard from "./components/User/UserDashboard";
+import Parking from "./components/User/Parking";
+ // ✅ correct
+import Reserve from "./components/User/Reserve";
+import Payments from "./components/User/Payments";
+import Profile from "./components/User/Profile";
 
-import Parking from "./components/User/Parking.jsx";
-import Reservation from "./components/User/Reservation.jsx";
-import UserLayout from "./components/User/UserLayout.jsx";
-import Profile from "./components/User/Profile.jsx";
-
+import AdminDashboard from "./components/Admin/AdminDashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
@@ -19,30 +20,25 @@ function App() {
     <Router>
       <Routes>
 
-        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/user-auth" element={<UserAuth />} />
         <Route path="/admin-auth" element={<AdminAuth />} />
-        <Route path="/dashboard" element={<UserLayout />}>
-          
-          {/* ✅ Default page when visiting /dashboard */}
-          <Route index element={<UserDashboard />} />
-          {/* Other nested routes */}
-            
 
-        </Route>
-
-        {/* User Dashboard */}
         <Route
-          path="/user-dashboard"
+          path="/dashboard"
           element={
             <ProtectedRoute roleRequired="user">
-              <UserDashboard />
+              <UserLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<UserDashboard />} />
+          <Route path="parking" element={<Parking />} />
+          <Route path="reservation" element={<Reserve />} />  {/* ✅ */}
+          <Route path="payments" element={<Payments />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
 
-        {/* Admin Dashboard */}
         <Route
           path="/admin-dashboard"
           element={
@@ -52,38 +48,8 @@ function App() {
           }
         />
 
-        {/* User Pages */}
-        <Route
-          path="/Parking"
-          element={
-            <ProtectedRoute roleRequired="user">
-              <Parking />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/Reservation"
-          element={
-            <ProtectedRoute roleRequired="user">
-              <Reservation />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/Profile"
-          element={
-            <ProtectedRoute roleRequired="user">
-              <Profile/>
-            </ProtectedRoute>
-          }
-        />
-
       </Routes>
     </Router>
-
-
   );
 }
 

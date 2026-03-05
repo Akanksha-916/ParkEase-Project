@@ -10,7 +10,7 @@ export default function LandingPage() {
     const isLoggedIn = localStorage.getItem("user");
 
     if (isLoggedIn) {
-      navigate("/Parking"); // ✅ Go to Parking page
+      navigate("/dashboard/Parking"); // ✅ Go to Parking page
     } else {
       navigate("/user-auth?mode=login"); // ✅ Go to User Login
     }

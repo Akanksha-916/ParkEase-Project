@@ -7,7 +7,6 @@ import {
   Clock, Zap, Heart, ArrowLeft, Shield, CheckCircle2, XCircle, Calendar
 } from "lucide-react";
 
-
 const mockData = [
   {
     id: 1,
@@ -170,7 +169,9 @@ const mockData = [
 function ParkingCard({ data, onSelect }) {
   const isLow = data.availableSlots < 20;
   return (
+    
     <div className="pe-card">
+
       <div className="pe-card-img-wrapper">
         <img src={data.image} alt={data.name} />
         <div className={`pe-slots-badge ${isLow ? 'low' : 'high'}`}>{data.availableSlots} slots available</div>
@@ -187,13 +188,16 @@ function ParkingCard({ data, onSelect }) {
         <button className="pe-view-details-btn" onClick={onSelect}>View Details & Book</button>
       </div>
     </div>
+
   );
 }
+
 
 export default function ParkingPage() {
   const [activeId, setActiveId] = useState(null); 
   const [showFilters, setShowFilters] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const selectedParking = mockData.find(p => p.id === activeId);
   const navigate = useNavigate(); // ✅ Initialize navigate
 
@@ -370,7 +374,8 @@ export default function ParkingPage() {
           return actions.order.capture().then(function () {
             alert("Payment Successful via PayPal!");
 
-            navigate("/Reservation", {
+            //navigate("/dashboard/reservation"); // ✅ Navigate to reservation page after successful payment
+            navigate("/dashboard/reservation", {
   state: {
     name: selectedParking.name,
     slot: selectedSlot,
@@ -402,73 +407,105 @@ export default function ParkingPage() {
     <button
       className="upi-btn"
       onClick={() => {
-        alert("UPI Payment Successful (Demo)");
-        navigate("/Reservation", {
-          state: {
-            name: selectedParking.name,
-            slot: selectedSlot,
-            address: selectedParking.address,
-            date: "2026-02-14",
-            timeStart: "14:00",
-            timeEnd: "18:00",
-            price: selectedParking.price,
-            duration: 4,
-          },
-        });
-      }}
-    >
+        setShowSuccessPopup(true);
+
+setTimeout(() => {
+
+setShowSuccessPopup(false);
+
+navigate("/dashboard/reservation", {
+state: {
+name: selectedParking.name,
+slot: selectedSlot,
+address: selectedParking.address,
+price: selectedParking.price
+}
+});
+
+}, 2000);
+
+}}
+>
       Pay via UPI
     </button>
 
     <button
       className="gpay-btn"
       onClick={() => {
-        alert("Google Pay Payment Successful (Demo)");
-        navigate("/Reservation", {
-          state: {
-            name: selectedParking.name,
-            slot: selectedSlot,
-            address: selectedParking.address,
-            date: "2026-02-14",
-            timeStart: "14:00",
-            timeEnd: "18:00",
-            price: selectedParking.price,
-            duration: 4,
-          },
-        });
-      }}
-    >
+        setShowSuccessPopup(true);
+
+setTimeout(() => {
+
+setShowSuccessPopup(false);
+
+navigate("/dashboard/reservation", {
+state: {
+name: selectedParking.name,
+slot: selectedSlot,
+address: selectedParking.address,
+price: selectedParking.price
+}
+});
+
+}, 2000);
+
+}}
+>
       Google Pay
     </button>
 
     <button
       className="phonepe-btn"
       onClick={() => {
-        alert("PhonePe Payment Successful (Demo)");
-        navigate("/Reservation", {
-          state: {
-            name: selectedParking.name,
-            slot: selectedSlot,
-            address: selectedParking.address,
-            date: "2026-02-14",
-            timeStart: "14:00",
-            timeEnd: "18:00",
-            price: selectedParking.price,
-            duration: 4,
-          },
-        });
-      }}
-    >
+        setShowSuccessPopup(true);
+
+setTimeout(() => {
+
+setShowSuccessPopup(false);
+
+navigate("/dashboard/reservation", {
+state: {
+name: selectedParking.name,
+slot: selectedSlot,
+address: selectedParking.address,
+price: selectedParking.price
+}
+});
+
+}, 2000);
+
+}}
+>
       PhonePe
     </button>
   </div>
 </div>
 
 
+
             </div>
           </div>
         )}
       </main>
+
+      {showSuccessPopup && (
+<div className="payment-popup">
+
+<div className="payment-card">
+
+<div className="success-icon">
+✓
+</div>
+
+<h2>Payment Successful</h2>
+<p>Your slot has been booked successfully</p>
+
+<div className="loading-bar"></div>
+
+</div>
+
+</div>
+)}
     </div>
   );
 }

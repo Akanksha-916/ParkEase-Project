@@ -9,7 +9,7 @@ import {
   CheckCircle2,
   XCircle
 } from "lucide-react";
-import "./Reservation.css";
+import "./Reserve.css";
 
 export default function Reservation() {
 
