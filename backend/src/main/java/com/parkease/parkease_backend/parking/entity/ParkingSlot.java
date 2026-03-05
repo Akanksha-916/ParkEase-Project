@@ -6,7 +6,12 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "parking_slots")
+@Table(
+        name = "parking_slots",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"lot_id", "slotNumber"})
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,4 +44,8 @@ public class ParkingSlot {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lot_id", nullable = false)
     private ParkingLot parkingLot;
+
+    @Column(name = "is_available", nullable = false)
+    @Builder.Default
+    private boolean isAvailable = true;
 }

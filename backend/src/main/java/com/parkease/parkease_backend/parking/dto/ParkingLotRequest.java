@@ -19,7 +19,7 @@ public class ParkingLotRequest {
     private String city;
 
     @NotBlank(message = "Pincode is required")
-    @Pattern(regexp = "\\d{6}", message = "Pincode must be 6 digits")
+    @Pattern(regexp = "^\\d{6}$", message = "Pincode must be exactly 6 digits")
     private String pincode;
 
     @NotEmpty(message = "At least one slot must be provided")
