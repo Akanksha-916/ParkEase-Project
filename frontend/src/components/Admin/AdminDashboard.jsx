@@ -57,11 +57,7 @@ const AdminDashboard = () => {
           <p>Welcome back, Admin - Thursday, March 5</p>
         </div>
         <div className="header-actions">
-          <div className="notification-wrapper">
-            <Bell size={20} />
-            <span className="notification-dot"></span>
-          </div>
-          <Settings size={20} className="settings-icon" />
+          
           <div className="status-indicator">
              <span className="live-dot"></span> Live
           </div>

@@ -11,11 +11,11 @@ import {
 } from 'lucide-react';
 
 const navigation = [
-  { name: 'Dashboard', path: '/AdminDashboard', icon: LayoutDashboard },
-  { name: 'Parking', path: '/ParkingManagement', icon: MapPin },
-  { name: 'Users', path: '/UserManagement', icon: Users },
-  { name: 'Activity', path: '/Activitylogs', icon: Activity },
-  { name: 'Pricing', path: '/Pricing', icon: DollarSign },
+  { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
+  { name: 'Parking', path: '/admin/parking-management', icon: MapPin },
+  { name: 'Users', path: '/admin/user-management', icon: Users },
+  { name: 'Activity', path: '/admin/activity-logs', icon: Activity },
+  { name: 'Pricing', path: '/admin/pricing', icon: DollarSign },
 ];
 
 const AdminLayout = () => {
@@ -133,7 +133,7 @@ const AdminLayout = () => {
             </button>
             
             <button 
-              onClick={() => navigate("/AdminAuth")}
+              onClick={() => navigate("/admin-auth")}
               style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', padding: '10px' }}
             >
               <LogOut size={22} />

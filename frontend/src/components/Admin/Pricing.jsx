@@ -49,10 +49,7 @@ const Pricing = () => {
           <h2>Dynamic Pricing</h2>
           <p>Welcome back, Admin</p>
         </div>
-        <div className="header-actions">
-          <Bell size={20} color="white" style={{cursor: 'pointer'}} />
-          <Settings size={20} color="white" style={{cursor: 'pointer'}} />
-        </div>
+      
       </header>
 
       <div className="pricing-content-body">
