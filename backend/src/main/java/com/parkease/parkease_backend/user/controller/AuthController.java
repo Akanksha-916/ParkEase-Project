@@ -76,4 +76,31 @@ public class AuthController {
 
         return new AuthResponse(token);
     }
+
+    @PostMapping("/register-owner")
+    public AuthResponse registerOwner(@RequestBody RegisterRequest request) {
+
+        log.info("Owner registration attempt for email={}", request.getEmail());
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
+
+        User owner = User.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .phoneNo(request.getPhoneNo())
+                .vehicleNo(request.getVehicleNo())
+                .role(Role.OWNER)
+                .build();
+
+        userRepository.save(owner);
+
+        log.info("Owner registered successfully email={}", request.getEmail());
+
+        String token = jwtService.generateToken(owner.getEmail());
+
+        return new AuthResponse(token);
+    }
 }
