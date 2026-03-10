@@ -4,6 +4,18 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import UserAuth from "./components/Auth/UserAuth";
 import AdminAuth from "./components/Auth/AdminAuth";
 
+/* -------- OWNER IMPORTS -------- */
+import OwnerLayout from "./components/owner/OwnerLayout";
+import OwnerDashboard from "./components/owner/OwnerDashboard";
+import OwnerAuth from "./components/Auth/OwnerAuth.jsx";
+import ManageSpaces from "./components/owner/ManageSpaces";
+import Booking from "./components/owner/Booking";
+import Earning from "./components/owner/Earning";
+import OwnerSidebar from "./components/owner/OwnerSidebar";
+import OwnerProfile from "./components/owner/Profileowner.jsx";
+
+/* -------- USER IMPORTS -------- */
+
 import UserLayout from "./components/User/UserLayout";
 import UserDashboard from "./components/User/UserDashboard";
 import Parking from "./components/User/Parking";
@@ -30,6 +42,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/user-auth" element={<UserAuth />} />
         <Route path="/admin-auth" element={<AdminAuth />} />
+        <Route path="/owner-auth" element={<OwnerAuth />} />
 
         {/* ================= USER ================= */}
         <Route
@@ -63,6 +76,16 @@ function App() {
           <Route path="pricing" element={<Pricing />} />
         </Route>
 
+        {/* ================= OWNER ================= */}
+        <Route path="/owner" element={<OwnerLayout />}>
+
+        <Route path="dashboard" element={<OwnerDashboard />} />
+        <Route path="spaces" element={<ManageSpaces />} />
+        <Route path="bookings" element={<Booking />} />
+        <Route path="earnings" element={<Earning />} />
+        <Route path="profileowner" element={<OwnerProfile />} />  
+
+</Route>
       </Routes>
     </Router>
   );

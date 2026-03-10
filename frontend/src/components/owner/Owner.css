@@ -1,0 +1,36 @@
+.owner-layout{
+  display:flex;
+}
+
+.owner-sidebar{
+  width:230px;
+  background:#0F172A;
+  color:white;
+  height:100vh;
+  padding:20px;
+}
+
+.owner-sidebar a{
+  display:block;
+  margin:15px 0;
+  color:white;
+  text-decoration:none;
+}
+
+.owner-content{
+  flex:1;
+  padding:30px;
+  background:#f5f7fb;
+}
+
+.cards{
+  display:flex;
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  width:200px;
+}

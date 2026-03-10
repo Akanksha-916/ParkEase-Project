@@ -179,3 +179,21 @@
     transform: translateY(0) scale(1);
   }
 }
+
+/* ================= OWNER THEME ================= */
+
+.owner-theme.auth-tri-wrapper.login {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.owner-theme.auth-tri-wrapper.register {
+  background: #ecfdf5;
+}
+
+.owner-theme .auth-form button {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.owner-theme .auth-form span {
+  color: #16a34a;
+}

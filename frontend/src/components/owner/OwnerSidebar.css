@@ -3,34 +3,43 @@
 * {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.25s ease;
 }
 
 .layout {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #dec4f7, #b4d6f8);
-  
+  background: linear-gradient(135deg, #e7d5ff, #c7d2fe);
 }
 
 /* ================= SIDEBAR ================= */
 
 .sidebar {
   width: 260px;
- background: #ffffff;
- /*background: linear-gradient(135deg, #471f7c);*/
-  padding: 25px;
+  background: #ffffff;
+  padding: 25px 18px;
   display: flex;
   flex-direction: column;
   position: fixed;
   height: 100vh;
   border-right: 1px solid #e5e7eb;
-  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.04);
+  box-shadow: 8px 0 25px rgba(0,0,0,0.05);
   z-index: 1000;
 }
 
+/* Collapsed Sidebar */
+
+.sidebar.collapsed {
+  width: 85px;
+}
+
+/* ================= LOGO ================= */
+
 .sidebar-header {
   margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -39,7 +48,11 @@
   background: linear-gradient(135deg, #8e2de2, #4a00e0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: white;
+}
+
+.collapse-btn {
+  cursor: pointer;
+  color: #6b7280;
 }
 
 /* ================= NAVIGATION ================= */
@@ -47,9 +60,10 @@
 .nav-links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  color: #dec4f7;
+  gap: 10px;
 }
+
+/* Navigation Item */
 
 .nav-item {
   display: flex;
@@ -60,24 +74,47 @@
   text-decoration: none;
   color: #374151;
   font-weight: 500;
+  position: relative;
 }
 
 .nav-item:hover {
   background: #f3f4f6;
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
+
+/* Active Item */
 
 .nav-item.active {
- background: linear-gradient(135deg, #8e2de2, #4a00e0);
+  background: linear-gradient(135deg, #8e2de2, #4a00e0);
   color: white;
-  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 10px 25px rgba(79,70,229,0.25);
 }
 
-/* ================= LOGOUT ================= */
+/* Notification Badge */
+
+.nav-badge {
+  position: absolute;
+  right: 12px;
+  background: #f43f5e;
+  color: white;
+  font-size: 10px;
+  padding: 3px 7px;
+  border-radius: 20px;
+}
+
+/* ================= SIDEBAR FOOTER ================= */
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+/* Logout */
 
 .logout {
-  margin-top: auto;
-  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
   border-radius: 12px;
   cursor: pointer;
   color: #ef4444;
@@ -97,11 +134,15 @@
   flex-direction: column;
 }
 
+.sidebar.collapsed ~ .main {
+  margin-left: 85px;
+}
+
 /* ================= TOPBAR ================= */
 
 .topbar {
-  background: linear-gradient(135deg, #ffffff);
-  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
   padding: 18px 30px;
   display: flex;
   justify-content: space-between;
@@ -128,7 +169,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #c4aaf1;
+  background: #f3f4f6;
   padding: 8px 14px;
   border-radius: 12px;
 }
@@ -164,10 +205,10 @@
   font-size: 10px;
   padding: 3px 6px;
   border-radius: 50px;
-  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.4);
+  box-shadow: 0 2px 8px rgba(244,63,94,0.4);
 }
 
-/* ================= USER DROPDOWN ================= */
+/* ================= USER PROFILE ================= */
 
 .user-dropdown {
   display: flex;
@@ -189,6 +230,8 @@
   font-weight: 600;
 }
 
+/* Dropdown */
+
 .dropdown-menu {
   position: absolute;
   top: 55px;
@@ -196,7 +239,7 @@
   background: white;
   width: 170px;
   border-radius: 14px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
   padding: 8px 0;
   z-index: 1000;
 }
@@ -216,33 +259,6 @@
   color: #ef4444;
 }
 
-/* ================= NOTIFICATION DROPDOWN ================= */
-
-.notification-dropdown {
-  position: absolute;
-  top: 60px;
-  right: 120px;
-  background: white;
-  width: 230px;
-  border-radius: 14px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-}
-
-.notification-dropdown p {
-  padding: 10px;
-  font-size: 14px;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.notification-dropdown p:last-child {
-  border-bottom: none;
-}
-
-.notification-dropdown p:hover {
-  background: #f9fafb;
-}
-
 /* ================= CONTENT ================= */
 
 .content {
@@ -250,18 +266,19 @@
   min-height: 100vh;
 }
 
-/* ================= CARD STYLE ================= */
+/* ================= CARDS ================= */
 
 .card {
   background: white;
   padding: 25px;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 900px) {
+
   .sidebar {
     left: -100%;
   }
@@ -277,4 +294,5 @@
   .menu-icon {
     display: block;
   }
+
 }

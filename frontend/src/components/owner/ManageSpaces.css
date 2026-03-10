@@ -1,0 +1,144 @@
+/* =========================
+   MANAGE SPACES PAGE
+========================= */
+
+.manage-container {
+  padding: 40px 60px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f7ff, #ece9ff);
+}
+
+.manage-container h1 {
+  color: #6d28d9;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* =========================
+   ADD SPACE FORM
+========================= */
+
+.space-form {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  width: 420px;
+  box-shadow: 0 10px 40px rgba(75,60,196,0.15);
+  margin-bottom: 40px;
+  transition: 0.3s ease;
+}
+
+.space-form:hover {
+  transform: translateY(-5px);
+}
+
+.space-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.space-form input:focus {
+  border-color: #6d28d9;
+  box-shadow: 0 0 0 2px rgba(109,40,217,0.1);
+}
+
+/* Button */
+
+.space-form button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: #6d28d9;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.space-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(75,60,196,0.3);
+}
+
+/* =========================
+   PARKING LIST
+========================= */
+
+.space-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 25px;
+}
+
+/* Card */
+
+.space-card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(75,60,196,0.1);
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.space-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Title */
+
+.space-card h3 {
+  color: #6d28d9;
+  margin-bottom: 8px;
+}
+
+/* Text */
+
+.space-card p {
+  color: #555;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* Slots */
+
+.space-card p span {
+  font-weight: 600;
+  color: #2f2f2f;
+}
+
+/* Delete Button */
+
+.delete-btn {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* Empty State */
+
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}

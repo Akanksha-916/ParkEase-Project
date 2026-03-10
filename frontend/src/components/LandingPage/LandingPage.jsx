@@ -36,6 +36,12 @@ export default function LandingPage() {
               <button onClick={() => navigate("/user-auth?mode=login")}>
                 User Login
               </button>
+
+
+              <button onClick={() => navigate("/owner-auth?mode=login")}>
+                Owner Login
+              </button>
+              
               <button onClick={() => navigate("/admin-auth?mode=login")}>
                 Admin Login
               </button>
