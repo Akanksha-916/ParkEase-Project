@@ -15,14 +15,14 @@ import {
 import "./Profileowner.css";
 
 const initialOwnerData = {
-  name: "Alex Johnson",
+  name: "Nilakshi Kuldhar",
   email: "owner@parkease.com",
   phone: "+91 9876543210",
   parkingName: "City Center Parking",
   location: "Mumbai, India",
   totalSlots: 50,
   availableSlots: 18,
-  totalRevenue: "$4200",
+  totalRevenue: "₹4200",
   avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Owner"
 };
 
@@ -33,8 +33,8 @@ export default function ProfileOwner() {
   const [ownerData] = useState(initialOwnerData);
 
   const bookings = [
-    { id: 1, user: "Rahul Sharma", slot: "A1", date: "3 March 2026", amount: "$10" },
-    { id: 2, user: "Priya Patel", slot: "B3", date: "2 March 2026", amount: "$12" }
+    { id: 1, user: "Rahul Sharma", slot: "A1", date: "3 March 2026", amount: "₹100" },
+    { id: 2, user: "Priya Patel", slot: "B3", date: "2 March 2026", amount: "₹120" }
   ];
 
   const slots = [
@@ -44,8 +44,8 @@ export default function ProfileOwner() {
   ];
 
   const revenue = [
-    { id: 1, date: "1 March 2026", amount: "$120" },
-    { id: 2, date: "2 March 2026", amount: "$150" }
+    { id: 1, date: "1 March 2026", amount: "₹120" },
+    { id: 2, date: "2 March 2026", amount: "₹150" }
   ];
 
   return (

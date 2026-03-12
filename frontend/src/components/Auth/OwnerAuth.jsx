@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import "./Auth.css";
+import { loginUser } from "../../services/authService";
 
 export default function OwnerAuth() {
 

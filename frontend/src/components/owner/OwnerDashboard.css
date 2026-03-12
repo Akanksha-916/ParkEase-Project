@@ -94,12 +94,12 @@
 
 /* Status Grid */
 
-.status-grid {
+.status-grid-1 {
   display: flex;
   gap: 20px;
 }
 
-.status {
+.status-1 {
   padding: 15px 25px;
   border-radius: 10px;
   font-weight: 600;
@@ -118,4 +118,46 @@
 .maintenance {
   background: #fef9c3;
   color: #a16207;
+}
+
+/* ================= DETAIL POPUP ================= */
+.detail-popup {
+  margin-top: 20px;
+  background: rgb(255, 255, 255); /* make background white for contrast */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  color: black; /* default text color */
+}
+
+.detail-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  color: black; /* header text black */
+}
+
+.detail-popup-header button {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: black; /* close button text */
+}
+
+.detail-popup-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: black; /* body text black */
+}
+
+.detail-card {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f3f4f6; /* light gray background */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  color: black; /* text inside cards */
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./ManageSpaces.css";
+import { getParkingLots, createParkingLot, deleteParkingLot } from "../../services/parkingService";
 
 export default function ManageSpaces() {
 
@@ -11,43 +12,63 @@ export default function ManageSpaces() {
   const [twoWheeler, setTwoWheeler] = useState("");
   const [fourWheeler, setFourWheeler] = useState("");
 
-  useEffect(() => {
-    const savedSpaces = JSON.parse(localStorage.getItem("spaces")) || [];
-    setSpaces(savedSpaces);
-  }, []);
+useEffect(() => {
+  getParkingLots()
+    .then((res) => {
+      setSpaces(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
 
   const addSpace = () => {
 
-    if (!name || !price) return;
+  if (!name || !price || !location) {
+    alert("Fill all fields");
+    return;
+  }
 
-    const newSpace = {
-      id: Date.now(),
-      name,
-      price,
-      twoWheeler,
-      fourWheeler,
-      availableTwo: twoWheeler,
-      availableFour: fourWheeler
-    };
-
-    const updated = [...spaces, newSpace];
-
-    setSpaces(updated);
-    localStorage.setItem("spaces", JSON.stringify(updated));
-
-    setName("");
-    setPrice("");
-    setTwoWheeler("");
-    setFourWheeler("");
+  const data = {
+    name: name,
+    location: location,
+    pricePerHour: Number(price),
+    twoWheelerSlots: Number(twoWheeler),
+    fourWheelerSlots: Number(fourWheeler)
   };
 
-  const deleteSpace = (id) => {
+  createParkingLot(data)
+    .then((res) => {
 
-    const updated = spaces.filter((space) => space.id !== id);
+      setSpaces([...spaces, res.data]);
 
-    setSpaces(updated);
-    localStorage.setItem("spaces", JSON.stringify(updated));
-  };
+      setName("");
+      setLocation("");
+      setPrice("");
+      setTwoWheeler("");
+      setFourWheeler("");
+
+    })
+    .catch((err) => {
+      console.log("Add Error:", err);
+    });
+
+};
+
+const deleteSpace = (id) => {
+
+  deleteParkingLot(id)
+    .then(() => {
+
+      const updated = spaces.filter((space) => space.id !== id);
+      setSpaces(updated);
+
+    })
+    .catch((err) => {
+      console.log("Delete Error:", err);
+    });
+
+};
 
   return (
     <div className="manage-container">
@@ -110,11 +131,11 @@ export default function ManageSpaces() {
 
             <h3>{space.name}</h3>
 
-            <p>Price: ₹{space.price} / hour</p>
+            <p>Price: ₹{space.pricePerHour} / hour</p>
 
-            <p>🛵 Two Wheeler Slots: {space.availableTwo}/{space.twoWheeler}</p>
+<p>🛵 Two Wheeler Slots: {space.twoWheelerSlots}</p>
 
-            <p>🚗 Four Wheeler Slots: {space.availableFour}/{space.fourWheeler}</p>
+<p>🚗 Four Wheeler Slots: {space.fourWheelerSlots}</p>
 
             <button
               className="delete-btn"
