@@ -1,6 +1,5 @@
+#🚀🚗 ParkEase – Smart Parking Spot Finder
 
-
-###🚀🚗 ParkEase – Smart Parking Spot Finder
 ParkEase is a full-stack intelligent parking system that enables users to find and reserve parking spaces in real time, while providing owners and administrators complete control over parking operations.
 
 ---
