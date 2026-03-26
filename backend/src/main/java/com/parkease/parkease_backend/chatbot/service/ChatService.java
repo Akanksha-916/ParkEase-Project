@@ -182,7 +182,7 @@ public class ChatService {
         else if (msg.startsWith("cancel slot")) {
             try {
                 if (authentication == null || !authentication.isAuthenticated()) {
-                    return "Please login to cancel booking.";
+                    return "Please login to cancel booking.\n if you want to know how to login or register typr <register> or <login>";
                 }
 
                 Long slotId = Long.parseLong(msg.split(" ")[2]);
@@ -327,7 +327,7 @@ public class ChatService {
     private String bookSlot(ChatRequest request, Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
-            return "🔒 Please login to book a slot.";
+            return "🔒 Please login to book a slot.if you want to know how to login or register typr <register> or <login>";
         }
 
         try {
