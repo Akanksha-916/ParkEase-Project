@@ -2,15 +2,20 @@ package com.parkease.parkease_backend.chatbot.service;
 
 import com.parkease.parkease_backend.booking.dto.BookingRequest;
 import com.parkease.parkease_backend.booking.dto.BookingResponse;
+import com.parkease.parkease_backend.booking.entity.Booking;
+import com.parkease.parkease_backend.booking.repository.BookingRepository;
 import com.parkease.parkease_backend.booking.service.BookingService;
 import com.parkease.parkease_backend.chatbot.dto.ChatRequest;
 import com.parkease.parkease_backend.parking.dto.ParkingLotResponse;
 import com.parkease.parkease_backend.parking.dto.ParkingSlotResponse;
 import com.parkease.parkease_backend.parking.service.ParkingLotService;
 import com.parkease.parkease_backend.parking.service.ParkingSlotService;
+import com.parkease.parkease_backend.user.base.User;
+import com.parkease.parkease_backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -22,6 +27,8 @@ public class ChatService {
     private final ParkingLotService parkingLotService;
     private final ParkingSlotService parkingSlotService;
     private final BookingService bookingService;
+    private final UserRepository userRepository;
+    private final BookingRepository bookingRepository;
 
 
     /**
@@ -171,6 +178,17 @@ public class ChatService {
         // BOOKING SLOT
         else if (msg.startsWith("book slot")) {
             return bookSlot(request, authentication);
+        } else if (msg.equals("my booking") || msg.equals("my bookings")) {
+
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return "🔒 Please login to view your bookings.";
+            }
+
+            String email = authentication.getName();
+
+            User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+
+            return getUserBookings(user);
         }
 
 
@@ -182,7 +200,7 @@ public class ChatService {
         else if (msg.startsWith("cancel slot")) {
             try {
                 if (authentication == null || !authentication.isAuthenticated()) {
-                    return "Please login to cancel booking.\n if you want to know how to login or register typr <register> or <login>";
+                    return "Please login to cancel booking.";
                 }
 
                 Long slotId = Long.parseLong(msg.split(" ")[2]);
@@ -234,7 +252,6 @@ public class ChatService {
                 return "Please specify location like 'parking in Hyderabad'";
             }
         }
-
 
 
         // Parking timing information
@@ -327,7 +344,7 @@ public class ChatService {
     private String bookSlot(ChatRequest request, Authentication authentication) {
 
         if (authentication == null || !authentication.isAuthenticated()) {
-            return "🔒 Please login to book a slot.if you want to know how to login or register typr <register> or <login>";
+            return "🔒 Please login to book a slot.\n before login if your are new user please register first after that you can login by email and password";
         }
 
         try {
@@ -382,6 +399,31 @@ public class ChatService {
             return "Parking lot not found.";
         }
     }
+
+    private String getUserBookings(User user) {
+
+        List<Booking> bookings = bookingRepository.findByUserId(user.getId());
+
+        StringBuilder response = new StringBuilder();
+
+        // 👤 FULL PROFILE DETAILS (same as your API)
+        response.append("👤 Profile Details:\n").append("ID: ").append(user.getId()).append("\n").append("Name: ").append(user.getName()).append("\n").append("Vehicle No: ").append(user.getVehicleNo()).append("\n").append("Phone No: ").append(user.getPhoneNo()).append("\n").append("Email: ").append(user.getEmail()).append("\n").append("Role: ").append(user.getRole()).append("\n").append("Status: ").append(user.getStatus()).append("\n\n");
+
+        // 📅 BOOKINGS
+        if (bookings.isEmpty()) {
+            response.append("📅 No bookings found.");
+            return response.toString();
+        }
+
+        response.append("📅 Your Bookings:\n");
+
+        for (Booking b : bookings) {
+            response.append("• Booking ID: ").append(b.getId()).append("\n").append("  Slot ID: ").append(b.getParkingSlot().getId()).append("\n").append("  Status: ").append(b.getStatus()).append("\n").append("  Time: ").append(b.getStartTime()).append(" to ").append(b.getEndTime()).append("\n\n");
+        }
+
+        return response.toString();
+    }
+
 
 }
 
