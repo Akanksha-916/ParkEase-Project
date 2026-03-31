@@ -13,6 +13,7 @@ import com.parkease.parkease_backend.parking.repository.ParkingLotRepository;
 import com.parkease.parkease_backend.parking.repository.ParkingSlotRepository;
 import com.parkease.parkease_backend.user.base.User;
 import com.parkease.parkease_backend.user.repository.UserRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -213,6 +214,36 @@ public class BookingService {
         }
 
         return availableSlots;
+    }
+
+    @Transactional
+    public List<BookingResponse> getOwnerBookings() {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        User owner = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<Booking> bookings =
+                bookingRepository.findBookingsByOwnerId(owner.getId(), Pageable.unpaged())
+                        .getContent();
+
+        return bookings.stream().map(booking ->
+
+                BookingResponse.builder()
+                        .bookingId(booking.getId())
+                        .lotId(booking.getParkingSlot().getParkingLot().getId())
+                        .slotId(booking.getParkingSlot().getId())
+                        .slotNumber(booking.getParkingSlot().getSlotNumber())
+                        .startTime(booking.getStartTime())
+                        .endTime(booking.getEndTime())
+                        .status(booking.getStatus())
+                        .build()
+
+        ).toList();
     }
 
 }

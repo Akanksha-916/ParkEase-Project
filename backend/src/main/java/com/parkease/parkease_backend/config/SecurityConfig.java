@@ -47,6 +47,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
+                                .requestMatchers("/api/v1/owner/**").hasRole("OWNER")
                                 .requestMatchers("/api/v1/profile/**").hasAnyRole("USER", "ADMIN", "OWNER")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/parking-lots/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v1/parking-lots/**").hasAnyRole("OWNER", "ADMIN")
